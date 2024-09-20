@@ -1,5 +1,6 @@
 package com.task.tourismsmart.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,12 +22,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.task.tourismsmart.doman.Restaurant
 import com.task.tourismsmart.viewModel.RestaurantViewModel
 
 @Composable
-fun RestaurantScreen(viewModel: RestaurantViewModel = viewModel()){
+fun RestaurantScreen(viewModel: RestaurantViewModel = viewModel() , navController: NavController){
 
     val restaurantList by viewModel.restaurantList.collectAsState()
 
@@ -48,21 +50,28 @@ fun RestaurantScreen(viewModel: RestaurantViewModel = viewModel()){
         Text(text = "Restaurant")
         LazyColumn {
             items(filterRestaurant){restaurant ->
-                RestaurantItem(restaurant)
+                RestaurantItem(
+                    restaurant = restaurant,
+                    navController = navController
+                )
             }
         }
 
     }
 }
 @Composable
-private fun RestaurantItem(restaurant : Restaurant){
+private fun RestaurantItem(restaurant : Restaurant , navController: NavController){
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .clickable {
+                navController.navigate("RestaurantDetails/${restaurant.name}")
+            }
     ) {
         Row(
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier
+                .padding(8.dp)
         ){
 
             AsyncImage(

@@ -6,6 +6,7 @@ import com.task.tourismsmart.api.RetrofitInstance
 import com.task.tourismsmart.doman.Restaurant
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.launch
 
 class RestaurantViewModel:ViewModel() {
@@ -23,5 +24,10 @@ class RestaurantViewModel:ViewModel() {
             val restaurant = RetrofitInstance.api.getRestaurant()
             _restaurantList.value = restaurant
         }
+    }
+
+    fun getRestaurantByName(name:String) = flow {
+        val restaurant = _restaurantList.value.find { it.name == name }
+        emit(restaurant)
     }
 }

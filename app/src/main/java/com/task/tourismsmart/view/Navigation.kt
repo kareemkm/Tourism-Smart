@@ -12,17 +12,30 @@ fun Navigation(){
         navController = navController,
         startDestination = "IntroScreen"
     ){
+        // Intro
         composable("IntroScreen"){
             IntroScreen(navController = navController)
         }
+        // Hotel
         composable("HotelsScreen") {
-            HotelsScreen()
+            HotelsScreen(navController = navController)
         }
+        composable("HotelDetails/{hotelName}") { backStackEntry ->
+            HotelDetailsScreen(backStackEntry = backStackEntry)
+        }
+        // Restaurant
         composable("RestaurantScreen"){
-            RestaurantScreen()
+            RestaurantScreen(navController = navController)
         }
+        composable("RestaurantDetails/{RestaurantName}"){backStackEntry ->
+            RestaurantDetailsScreen(backStackEntry = backStackEntry)
+        }
+        // Activity
         composable("ActivityScreen"){
-            ActivityScreen()
+            ActivityScreen(navController = navController)
+        }
+        composable("ActivityDetails/{ActivityName}"){backStackEntry ->
+            ActivityDetailsScreen(backStackEntry = backStackEntry)
         }
 
     }

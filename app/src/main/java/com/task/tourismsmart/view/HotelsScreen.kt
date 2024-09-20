@@ -1,5 +1,6 @@
 package com.task.tourismsmart.view
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,12 +22,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.task.tourismsmart.doman.Hotel
 import com.task.tourismsmart.viewModel.HotelViewModel
 
 @Composable
-fun HotelsScreen(viewModel: HotelViewModel = viewModel()){
+fun HotelsScreen(viewModel: HotelViewModel = viewModel() , navController: NavController){
 
     val hotelList by viewModel.hotelList.collectAsState()
 
@@ -51,18 +53,24 @@ fun HotelsScreen(viewModel: HotelViewModel = viewModel()){
         Text(text = "Hotels")
         LazyColumn {
             items(filterHotels){hotel ->
-                HotelItem(hotel)
+                HotelItem(
+                    hotel = hotel,
+                    navController = navController
+                )
             }
         }
 
     }
 }
 @Composable
-private fun HotelItem(hotel: Hotel){
+private fun HotelItem(hotel: Hotel , navController: NavController){
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .clickable {
+                navController.navigate("HotelDetails/${hotel.name}")
+            }
     ) {
         Row(
             modifier = Modifier.padding(8.dp)
