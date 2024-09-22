@@ -1,4 +1,4 @@
-package com.task.tourismsmart.view
+package com.task.tourismsmart.view.restaurant
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text

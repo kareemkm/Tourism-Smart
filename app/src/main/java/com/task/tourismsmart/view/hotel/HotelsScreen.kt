@@ -1,4 +1,4 @@
-package com.task.tourismsmart.view
+package com.task.tourismsmart.view.hotel
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
@@ -24,34 +24,37 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
-import com.task.tourismsmart.doman.Restaurant
-import com.task.tourismsmart.viewModel.RestaurantViewModel
+import com.task.tourismsmart.doman.Hotel
+import com.task.tourismsmart.viewModel.HotelViewModel
 
 @Composable
-fun RestaurantScreen(viewModel: RestaurantViewModel = viewModel() , navController: NavController){
+fun HotelsScreen(viewModel: HotelViewModel = viewModel() , navController: NavController){
 
-    val restaurantList by viewModel.restaurantList.collectAsState()
+    val hotelList by viewModel.hotelList.collectAsState()
 
     var query by remember { mutableStateOf("") }
+
+
+
 
     Column(modifier = Modifier.fillMaxSize().padding(16.dp)) {
         TextField(
             value = query,
             onValueChange = {query = it},
-            label = { Text(text = "Search by Restaurant") }
+            label = { Text(text = "Search by name hotel") }
         )
-        val filterRestaurant = if (query.isEmpty()){
-            restaurantList
+        val filterHotels = if (query.isEmpty()){
+            hotelList
         } else{
-            restaurantList.filter {
-                it.name.contains(query , ignoreCase = true)
+            hotelList.filter {
+                it.city.contains(query , ignoreCase = true)
             }
         }
-        Text(text = "Restaurant")
+        Text(text = "Hotels")
         LazyColumn {
-            items(filterRestaurant){restaurant ->
-                RestaurantItem(
-                    restaurant = restaurant,
+            items(filterHotels){hotel ->
+                HotelItem(
+                    hotel = hotel,
                     navController = navController
                 )
             }
@@ -60,35 +63,53 @@ fun RestaurantScreen(viewModel: RestaurantViewModel = viewModel() , navControlle
     }
 }
 @Composable
-private fun RestaurantItem(restaurant : Restaurant , navController: NavController){
+private fun HotelItem(hotel: Hotel , navController: NavController){
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
             .clickable {
-                navController.navigate("RestaurantDetails/${restaurant.name}")
+                navController.navigate("HotelDetails/${hotel.name}")
             }
     ) {
         Row(
-            modifier = Modifier
-                .padding(8.dp)
+            modifier = Modifier.padding(8.dp)
         ){
-
             AsyncImage(
-                model = restaurant.image,
-                contentDescription = restaurant.image,
+                model = hotel.image1,
+                contentDescription = hotel.image1,
+                modifier = Modifier.size(100.dp).padding(end = 8.dp),
+                contentScale = ContentScale.Crop
+            )
+            AsyncImage(
+                model = hotel.image2,
+                contentDescription = hotel.image2,
                 modifier = Modifier.size(100.dp).padding(end = 8.dp),
                 contentScale = ContentScale.Crop
             )
             Column {
                 Text(
-                    text = restaurant.name
+                    text = hotel.name
                 )
                 Text(
-                    text = restaurant.rating
+                    text = hotel.city
                 )
             }
         }
     }
-
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

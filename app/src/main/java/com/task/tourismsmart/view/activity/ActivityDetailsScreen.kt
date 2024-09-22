@@ -1,4 +1,4 @@
-package com.task.tourismsmart.view
+package com.task.tourismsmart.view.activity
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
@@ -8,7 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavBackStackEntry
 import com.task.tourismsmart.viewModel.ActivityViewModel
-import org.w3c.dom.Text
 
 @Composable
 fun ActivityDetailsScreen(backStackEntry: NavBackStackEntry , viewModel: ActivityViewModel = viewModel()){

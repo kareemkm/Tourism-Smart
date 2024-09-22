@@ -1,4 +1,4 @@
-package com.task.tourismsmart.view
+package com.task.tourismsmart.view.hotel
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
@@ -22,6 +22,7 @@ fun HotelDetailsScreen(backStackEntry: NavBackStackEntry , viewModel: HotelViewM
             Text(text = hotelDetails.name)
             Text(text = hotelDetails.city)
             Text(text = hotelDetails.totalScore)
+            Text(text = hotelDetails.urlGoogleMap)
         }
 
 

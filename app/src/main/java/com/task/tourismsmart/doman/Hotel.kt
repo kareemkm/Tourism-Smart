@@ -1,5 +1,7 @@
 package com.task.tourismsmart.doman
 
+import com.google.gson.annotations.SerializedName
+
 data class Hotel(
     val city :String,
     val image1: String,
@@ -7,7 +9,8 @@ data class Hotel(
     val image3: String,
     val name: String,
     val totalScore: String,
-    val url_google_map: String,
+    @SerializedName("url_google_map")
+    val urlGoogleMap: String,
     val website: String
 
 )

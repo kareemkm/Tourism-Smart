@@ -1,6 +1,8 @@
 package com.task.tourismsmart.api
 
 import com.task.tourismsmart.doman.Activity
+import com.task.tourismsmart.doman.Cities
+import com.task.tourismsmart.doman.CitiesResponse
 import com.task.tourismsmart.doman.Hotel
 import com.task.tourismsmart.doman.Restaurant
 import retrofit2.Retrofit
@@ -16,6 +18,9 @@ interface ApiService {
 
     @GET("data_activity.json")
     suspend fun getActivity(): List<Activity>
+
+    @GET("cities.json")
+    suspend fun getCities(): CitiesResponse
 
 }
 object RetrofitInstance{
